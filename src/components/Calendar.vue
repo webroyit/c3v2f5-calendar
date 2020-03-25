@@ -136,6 +136,42 @@ export default {
   mounted(){
     this.getEvents();
   },
+  // display the date as title
+  computed: {
+    title () {
+      const { start, end } = this
+      if (!start || !end) {
+        return ''
+      }
+
+      const startMonth = this.monthFormatter(start)
+      const endMonth = this.monthFormatter(end)
+      const suffixMonth = startMonth === endMonth ? '' : endMonth
+
+      const startYear = start.year
+      const endYear = end.year
+      const suffixYear = startYear === endYear ? '' : endYear
+
+      const startDay = start.day + this.nth(start.day)
+      const endDay = end.day + this.nth(end.day)
+
+      switch (this.type) {
+        case 'month':
+          return `${startMonth} ${startYear}`
+        case 'week':
+        case '4day':
+          return `${startMonth} ${startDay} ${startYear} - ${suffixMonth} ${endDay} ${suffixYear}`
+        case 'day':
+          return `${startMonth} ${startDay} ${startYear}`
+      }
+      return ''
+    },
+    monthFormatter () {
+      return this.$refs.calendar.getFormatter({
+        timeZone: 'UTC', month: 'long',
+      })
+    },
+  },
   methods: {
     // firebase return a promise
     async getEvents(){
@@ -192,7 +228,25 @@ export default {
       }
 
       nativeEvent.stopPropagation();
-    }
+    },
+    // update the date of the title
+    updateRange({ start, end }) {
+      this.start = start
+      this.end = end
+    },
+    nth(d) {
+      return d > 3 && d < 21
+        ? 'th'
+        : ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'][d % 10]
+    },
+    rnd(a, b) {
+      return Math.floor((b - a + 1) * Math.random()) + a
+    },
+    formatDate(a, withTime) {
+      return withTime
+        ? `${a.getFullYear()}-${a.getMonth() + 1}-${a.getDate()} ${a.getHours()}:${a.getMinutes()}`
+        : `${a.getFullYear()}-${a.getMonth() + 1}-${a.getDate()}`
+    },
   }
 }
 </script>
