@@ -103,6 +103,9 @@
 </template>
 
 <script>
+// @ is the root of the app
+import { db } from '@/main';
+
 export default {
   data: () => ({
     // toISOString() get the date and time
@@ -127,7 +130,30 @@ export default {
     selectedOpen: false,
     events: [],
     dialog: false
-  })
+  }),
+  // life cycles methods
+  // get call when the component is mounted
+  mounted(){
+    this.getEvents();
+  },
+  methods: {
+    // firebase return a promise
+    async getEvents(){
+      // get the collection from the firebase
+      let snapshot = await db.collection("calEvent").get();
+      let events = [];
+
+      snapshot.forEach(doc => {
+        let appData = doc.data();
+
+        appData.id = doc.id;
+        events.push(appData);
+      });
+
+      // update the list
+      this.events = events;
+    }
+  }
 }
 </script>
 
