@@ -153,13 +153,18 @@ export default {
       // update the list
       this.events = events;
     },
+    // show all the events for the select date
+    viewDay({ date }) {
+      this.focus = date;
+      this.type = 'day';
+    },
     // go to the previous month
     prev() {
-      this.$refs.calendar.prev()
+      this.$refs.calendar.prev();
     },
     // go to the next month
     next() {
-      this.$refs.calendar.next()
+      this.$refs.calendar.next();
     },
     // apply the event color to the calendar
     getEventColor(ev){
@@ -168,21 +173,21 @@ export default {
     // show the popup of the event
     showEvent({ nativeEvent, event }) {
       const open = () => {
-        this.selectedEvent = event
-        this.selectedElement = nativeEvent.target
+        this.selectedEvent = event;
+        this.selectedElement = nativeEvent.target;
 
         // delay the popup
-        setTimeout(() => this.selectedOpen = true, 10)
+        setTimeout(() => this.selectedOpen = true, 10);
       }
 
       if(this.selectedOpen) {
-        this.selectedOpen = false
-        setTimeout(open, 10)
+        this.selectedOpen = false;
+        setTimeout(open, 10);
       } else {
-        open()
+        open();
       }
 
-      nativeEvent.stopPropagation()
+      nativeEvent.stopPropagation();
     }
   }
 }
