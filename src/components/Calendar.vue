@@ -153,6 +153,14 @@ export default {
       // update the list
       this.events = events;
     },
+    // go to the previous month
+    prev() {
+      this.$refs.calendar.prev()
+    },
+    // go to the next month
+    next() {
+      this.$refs.calendar.next()
+    },
     // apply the event color to the calendar
     getEventColor(ev){
       return ev.color;
