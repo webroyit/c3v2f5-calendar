@@ -164,6 +164,25 @@ export default {
     // apply the event color to the calendar
     getEventColor(ev){
       return ev.color;
+    },
+    // show the popup of the event
+    showEvent({ nativeEvent, event }) {
+      const open = () => {
+        this.selectedEvent = event
+        this.selectedElement = nativeEvent.target
+
+        // delay the popup
+        setTimeout(() => this.selectedOpen = true, 10)
+      }
+
+      if(this.selectedOpen) {
+        this.selectedOpen = false
+        setTimeout(open, 10)
+      } else {
+        open()
+      }
+
+      nativeEvent.stopPropagation()
     }
   }
 }
