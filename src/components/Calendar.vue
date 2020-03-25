@@ -152,6 +152,10 @@ export default {
 
       // update the list
       this.events = events;
+    },
+    // apply the event color to the calendar
+    getEventColor(ev){
+      return ev.color;
     }
   }
 }
