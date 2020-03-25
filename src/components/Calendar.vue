@@ -104,7 +104,30 @@
 
 <script>
 export default {
-  
+  data: () => ({
+    // toISOString() get the date and time
+    // substr() to get the date only
+    today: new Date().toISOString().substr(0, 10),
+    focus: new Date().toISOString().substr(0, 10),
+    type: "month",        // show the calender by month
+    typeToLabel: {        // dropdown to show calender by
+      month: "Month",
+      week: "Week",
+      day: "Day",
+      "4day": "4 Days"
+    },
+    name: null,
+    details: null,
+    start: null,
+    end: null,
+    color: "#9da6a6",
+    currentlyEditing: null,
+    selectedEvent: {},
+    selectedElement: null,
+    selectedOpen: false,
+    events: [],
+    dialog: false
+  })
 }
 </script>
 
