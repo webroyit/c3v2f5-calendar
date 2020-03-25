@@ -158,6 +158,10 @@ export default {
       this.focus = date;
       this.type = 'day';
     },
+    // change the focus to today date
+    setToday () {
+      this.focus = this.today
+    },
     // go to the previous month
     prev() {
       this.$refs.calendar.prev();
