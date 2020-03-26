@@ -45,6 +45,23 @@
           </v-menu>
         </v-toolbar>
       </v-sheet>
+      
+      <!-- add event dialog -->
+      <v-dialog v-model="dialog" max-width="500">
+        <v-card>
+          <v-form @submit.prevent="addEvent">
+            <v-text-field v-model="name" type="text" label="Event Name"></v-text-field>
+            <v-text-field v-model="details" type="text" label="Details"></v-text-field>
+            <v-text-field v-model="start" type="date" label="Start"></v-text-field>
+            <v-text-field v-model="end" type="date" label="End"></v-text-field>
+            <v-text-field v-model="color" type="color" label="Color"></v-text-field>
+            <v-btn type="submit" color="primary" class="mr-4" @click.stop="dialog=false">
+              Create Event
+            </v-btn>
+          </v-form>
+        </v-card>
+      </v-dialog>
+
       <v-sheet height="600">
         <v-calendar
           ref="calendar"
