@@ -78,7 +78,18 @@
               <v-spacer></v-spacer>
             </v-toolbar>
             <v-card-text>
-              <span v-html="selectedEvent.details"></span>
+              <form v-if="currentlyEditing !== selectedEvent.id">
+                {{selectedEvent.details}}
+              </form>
+              <form v-else>
+                <textarea-autosize
+                  v-model="selectedEvent.details"
+                  type="text"
+                  styles="width: 100%"
+                  :min-height="100"
+                  placeholder="add note">
+                </textarea-autosize>
+              </form>
             </v-card-text>
             <v-card-actions>
               <v-btn
