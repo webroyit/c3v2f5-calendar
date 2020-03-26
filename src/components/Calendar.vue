@@ -85,7 +85,7 @@
                 <textarea-autosize
                   v-model="selectedEvent.details"
                   type="text"
-                  styles="width: 100%"
+                  style="width: 100%"
                   :min-height="100"
                   placeholder="add note">
                 </textarea-autosize>
@@ -247,6 +247,10 @@ export default {
       }
 
       nativeEvent.stopPropagation();
+    },
+    // go to edit mode
+    editEvent(ev){
+      this.currentlyEditing = ev.id;
     },
     // update the date of the title
     updateRange({ start, end }) {
