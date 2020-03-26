@@ -218,6 +218,14 @@ export default {
       this.selectedOpen = false;
       this.currentlyEditing = null;
     },
+    // delete an event from firebase
+    async deleteEvent(ev){
+      await db.collection("calEvent").doc(ev).delete();
+
+      // reset
+      this.selectedOpen = false;
+      this.getEvents();
+    },
     // show all the events for the select date
     viewDay({ date }) {
       this.focus = date;
