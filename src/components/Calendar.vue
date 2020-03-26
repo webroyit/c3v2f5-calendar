@@ -208,6 +208,16 @@ export default {
       // update the list
       this.events = events;
     },
+    // update the event from firebase
+    async updateEvent(ev){
+      await db.collection("calEvent").doc(this.currentlyEditing).update({
+        details: ev.details
+      });
+
+      // reset
+      this.selectedOpen = false;
+      this.currentlyEditing = null;
+    },
     // show all the events for the select date
     viewDay({ date }) {
       this.focus = date;
