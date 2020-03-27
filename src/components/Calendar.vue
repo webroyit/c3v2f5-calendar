@@ -231,7 +231,20 @@ export default {
     // add an event to the firebase
     async addEvent(){
       if(this.name && this.start && this.end){
-        console.log(this.name, this.start, this.end);
+        await db.collection("calEvent").add({
+          name: this.name,
+          details: this.details,
+          start: this.start,
+          end: this.end,
+          color: this.color
+        });
+
+        this.getEvents();
+        this.name = "";
+        this.details = "";
+        this.start = "";
+        this.end = "";
+        this.color = "#9da6a6";
       }
       else{
         alert("Fill out all the fields");
