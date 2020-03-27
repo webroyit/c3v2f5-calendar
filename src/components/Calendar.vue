@@ -228,6 +228,15 @@ export default {
       // update the list
       this.events = events;
     },
+    // add an event to the firebase
+    async addEvent(){
+      if(this.name && this.start && this.end){
+        console.log(this.name, this.start, this.end);
+      }
+      else{
+        alert("Fill out all the fields");
+      }
+    },
     // update the event from firebase
     async updateEvent(ev){
       await db.collection("calEvent").doc(this.currentlyEditing).update({
